@@ -10,10 +10,12 @@ import {SummryComponent} from './summry/summry.component';
 import {LogComponent} from './log/log.component';
 import {SearchComponent} from './search/search.component';
 import {TableComponent} from './table/table.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule
   ],
   exports: [LayoutComponent],
   declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent, SummryComponent, LogComponent, SearchComponent, TableComponent]
