@@ -1,29 +1,36 @@
-<nav id="sidebar">
+<nav id="sidebar" xmlns="http://www.w3.org/1999/html">
   <div class="sidebar-header">
     <img src="assets/img/logo.png" alt="AMAN">
   </div>
-
-  <ul class="list-unstyled components">
+  <div class="sidebar-title">
     <p>Recharg Automation</p>
-    <!--TODO : Change Active Class -->
-    <li class="active">
-      <a routerLink="/transfer">Bulk Transfers</a>
+  </div>
+
+  <ul *ngIf="login" class="list-unstyled components">
+
+
+    <li routerLink="/transfer" routerLinkActive="active">
+      <a>Bulk Transfers</a>
     </li>
-    <li>
-      <a routerLink="/log">View Log</a>
+    <li routerLink="/log" routerLinkActive="active">
+      <a>View Log</a>
     </li>
 
   </ul>
 
   <ul class="list-unstyled buttons">
     <li>
-      <a routerLink="/change-password" class="btn-bleu">Change Password</a>
+      <a *ngIf="login" routerLink="/change-password" class="btn-bleu">Change Password</a>
     </li>
     <li>
-      <a routerLink="/change-terminal" class="btn-bleu">Change Terminal</a>
+      <a *ngIf="login" routerLink="/change-terminal" class="btn-bleu">Change Terminal</a>
     </li>
     <li>
-      <a routerLink="/logout" class="btn-white">Logout</a>
+      <a *ngIf="login" routerLink="/logout" class="btn-white">Logout</a>
+    </li>
+
+    <li>
+      <a *ngIf="!login" routerLink="/login" class="btn-white">Login</a>
     </li>
 
   </ul>
