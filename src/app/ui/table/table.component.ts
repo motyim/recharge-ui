@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {TransferLog} from '../../interface/TransferLog';
+import {TransferlogService} from '../../service/transferlog.service';
 
 @Component({
   selector: 'app-table',
@@ -7,10 +9,13 @@ import {Component, OnInit} from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  constructor() {
+  transferlog: TransferLog [];
+
+  constructor(private transferlogService: TransferlogService) {
   }
 
   ngOnInit() {
+    this.transferlog = this.transferlogService.getLog();
   }
 
 }

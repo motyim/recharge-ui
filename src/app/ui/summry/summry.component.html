@@ -4,21 +4,21 @@
   <table>
     <tr>
       <td>Session ID</td>
-      <td>1212312412</td>
+      <td>{{summaryData.sessionId}}</td>
     </tr>
     <tr>
       <td>Total Processed Record</td>
-      <td>20</td>
+      <td>{{summaryData.totalProcessed}}</td>
     </tr>
     <tr>
       <td>Committed Transfers</td>
-      <td>22</td>
+      <td>{{summaryData.commitedTransfers}}</td>
     </tr>
     <tr>
       <td>Rejected Transfers</td>
-      <td>4</td>
+      <td>{{summaryData.rejectedTransfers}}</td>
     </tr>
   </table>
   <br>
-  <button class="btn btn-primary btn-block"> Detailed Log</button>
+  <button class="btn btn-primary btn-block" routerLink="/log"> Detailed Log</button>
 </div>

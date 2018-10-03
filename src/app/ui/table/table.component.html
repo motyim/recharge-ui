@@ -13,37 +13,17 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>CIB</td>
-      <td>123</td>
-      <td>12345</td>
-      <td>12345</td>
-      <td>12/11/2019</td>
-      <td>Faild</td>
-      <td>Mjagy Keda</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>CIB</td>
-      <td>123</td>
-      <td>12345</td>
-      <td>12345</td>
-      <td>12/11/2019</td>
-      <td>Faild</td>
-      <td>Mjagy Keda</td>
-    </tr>
-    <tr>
-      <th scope="row">1</th>
-      <td>CIB</td>
-      <td>123</td>
-      <td>12345</td>
-      <td>12345</td>
-      <td>12/11/2019</td>
-      <td>Faild</td>
-      <td>Mjagy Keda</td>
-    </tr>
 
+    <tr *ngFor="let log of transferlog ">
+      <td scope="row">{{log.SessionID}}</td>
+      <td>{{log.BankName}}</td>
+      <td>{{log.TerminalID}}</td>
+      <td>{{log.TransferAmount}}</td>
+      <td>{{log.DepositAmount}}</td>
+      <td>{{log.DepositDate}}</td>
+      <td>{{log.Status}}</td>
+      <td>{{log.RejectionReason}}</td>
+    </tr>
 
     </tbody>
   </table>
@@ -53,7 +33,7 @@
       <span class="text-muted pointer"> <i class="fas fa-trash"></i> Clear</span> |
       <span class="text-muted pointer"> <i class="fas fa-file-export"></i> Export</span> |
       <span class="text-muted pointer"> <i class="fas fa-arrow-left"></i> previous</span> |
-      <span class="text-muted pointer"> <i class="fas fa-arrow-right"></i> Next</span>
+      <span class="text-muted pointer"> Next <i class="fas fa-arrow-right"></i></span>
 
 
     </div>

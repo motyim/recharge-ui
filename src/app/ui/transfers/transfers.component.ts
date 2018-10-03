@@ -6,7 +6,7 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./transfers.component.css']
 })
 export class TransfersComponent implements OnInit {
-
+  TerminalID: number = 80006;
   constructor() {
   }
 

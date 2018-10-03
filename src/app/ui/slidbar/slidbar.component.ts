@@ -8,7 +8,6 @@ import {Component, OnInit} from '@angular/core';
 export class SlidbarComponent implements OnInit {
 
   login = true;
-  selectPage = 'log';
   constructor() {
   }
 
