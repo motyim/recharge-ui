@@ -11,6 +11,7 @@ import {LogComponent} from './log/log.component';
 import {SearchComponent} from './search/search.component';
 import {TableComponent} from './table/table.component';
 import {AppRoutingModule} from './app-routing.module';
+import {FileSelectDirective} from 'ng2-file-upload';
 
 @NgModule({
   imports: [
@@ -18,7 +19,7 @@ import {AppRoutingModule} from './app-routing.module';
     AppRoutingModule
   ],
   exports: [LayoutComponent],
-  declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent, SummryComponent, LogComponent, SearchComponent, TableComponent]
+  declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent, SummryComponent, LogComponent, SearchComponent, TableComponent, FileSelectDirective]
 })
 export class UiModule {
 }
