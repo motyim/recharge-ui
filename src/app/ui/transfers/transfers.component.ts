@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload/ng2-file-upload';
+import {SessionService} from '../../service/session.service';
+import {AmanResponse} from '../../interface/AmanResponse';
+
 
 @Component({
   selector: 'app-transfers',
@@ -16,7 +19,7 @@ export class TransfersComponent implements OnInit {
   uploadError: boolean;
   uploadSuccess: boolean;
 
-  constructor() {
+  constructor(private session: SessionService) {
     this.URL = 'http://10.140.173.16:15732/bulktransfer';
     this.fileChooser = 'Select Deposits Datasheet';
     this.TerminalID = 80006;
@@ -39,6 +42,7 @@ export class TransfersComponent implements OnInit {
         case 200:
           this.uploadSuccess = true;
           this.uploadError = false;
+          this.session.setSessionId((<AmanResponse>JSON.parse(response)).data.uuid);
           break;
       }
     };
