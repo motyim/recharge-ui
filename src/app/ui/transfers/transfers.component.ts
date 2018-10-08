@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {FileUploader} from 'ng2-file-upload/ng2-file-upload';
 import {SessionService} from '../../service/session.service';
 import {AmanResponse} from '../../interface/AmanResponse';
+import {environment} from '../../../environments/environment';
+import {LoginService} from '../../service/login.service';
 
 
 @Component({
@@ -19,13 +21,15 @@ export class TransfersComponent implements OnInit {
   uploadError: boolean;
   uploadSuccess: boolean;
 
-  constructor(private session: SessionService) {
-    this.URL = 'http://10.140.173.16:15732/bulktransfer';
+  constructor(private session: SessionService , private login: LoginService) {
+    this.URL = environment.baseUrl + 'bulktransfer';
     this.fileChooser = 'Select Deposits Datasheet';
     this.TerminalID = 80006;
     this.uploader = new FileUploader({url: this.URL, itemAlias: 'file', queueLimit: 1});
     this.uploadError = false;
     this.uploadSuccess = false;
+    //check login
+    login.isLoggedIn();
   }
 
   ngOnInit() {

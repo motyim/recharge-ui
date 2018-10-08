@@ -12,14 +12,19 @@ import {SearchComponent} from './search/search.component';
 import {TableComponent} from './table/table.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FileSelectDirective} from 'ng2-file-upload';
+import { FormsModule } from '@angular/forms';
+import {Ng2Webstorage} from 'ngx-webstorage';
+import { LogoutComponent } from './logout/logout.component';
 
 @NgModule({
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    Ng2Webstorage
   ],
   exports: [LayoutComponent],
-  declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent, SummryComponent, LogComponent, SearchComponent, TableComponent, FileSelectDirective]
+  declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent, SummryComponent, LogComponent, SearchComponent, TableComponent, FileSelectDirective, LogoutComponent]
 })
 export class UiModule {
 }

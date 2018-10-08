@@ -6,7 +6,7 @@
       <th scope="col">Bank Name</th>
       <th scope="col">Terminal ID</th>
       <th scope="col">Transfer Amount</th>
-      <th scope="col">Deposit Amount</th>
+      <!-- <th scope="col">Deposit Amount</th> -->
       <th scope="col">Deposit Date</th>
       <th scope="col">Status</th>
       <th scope="col">Rejection Reason</th>
@@ -14,15 +14,16 @@
     </thead>
     <tbody>
 
-    <tr *ngFor="let log of transferlog ">
-      <td scope="row">{{log.SessionID}}</td>
-      <td>{{log.BankName}}</td>
-      <td>{{log.TerminalID}}</td>
-      <td>{{log.TransferAmount}}</td>
-      <td>{{log.DepositAmount}}</td>
-      <td>{{log.DepositDate}}</td>
-      <td>{{log.Status}}</td>
-      <td>{{log.RejectionReason}}</td>
+    <tr *ngFor="let log of searchService.logsDTO " >
+      <td scope="row">{{log.sessionId}}</td>
+      <td>{{log.bankName}}</td>
+      <td>{{log.terminalId}}</td>
+      <td>{{log.transferAmount}}</td>
+      <!-- <td>{{log.DepositAmount}}</td> -->
+      <td>{{log.depositDate | date}}</td>
+      <td>{{log.status}}</td>
+      <td>{{log.rejectionReason}}</td>
+
     </tr>
 
     </tbody>
@@ -32,8 +33,8 @@
     <div class="container">
       <span class="text-muted pointer"> <i class="fas fa-trash"></i> Clear</span> |
       <span class="text-muted pointer"> <i class="fas fa-file-export"></i> Export</span> |
-      <span class="text-muted pointer"> <i class="fas fa-arrow-left"></i> previous</span> |
-      <span class="text-muted pointer"> Next <i class="fas fa-arrow-right"></i></span>
+      <span class="text-muted pointer"> <i class="fas fa-arrow-left" (click)="previous()"></i> previous</span> |
+      <span class="text-muted pointer"> Next <i class="fas fa-arrow-right" (click)="next()"></i></span>
 
 
     </div>

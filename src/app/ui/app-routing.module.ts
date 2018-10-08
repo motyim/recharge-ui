@@ -6,6 +6,7 @@ import {ConfigerComponent} from './configer/configer.component';
 import {TransfersComponent} from './transfers/transfers.component';
 import {LoginComponent} from './login/login.component';
 import {SummryComponent} from './summry/summry.component';
+import {LogoutComponent} from './logout/logout.component';
 
 const routes: Routes = [
   {path: 'log', component: LogComponent},
@@ -13,7 +14,9 @@ const routes: Routes = [
   {path: 'change-password', component: LoginComponent},
   {path: 'change-terminal', component: ConfigerComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'summary', component: SummryComponent}
+  {path: '' , component: LogComponent},
+  {path: 'summary', component: SummryComponent},
+  {path: 'logout', component: LogoutComponent}
 ];
 
 @NgModule({

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {SummuryService} from '../../service/summury.service';
-import {Summary} from '../../interface/Summary';
+import {SummuryDTO} from '../../interface/SummuryDTO';
 
 @Component({
   selector: 'app-summry',
@@ -9,11 +9,12 @@ import {Summary} from '../../interface/Summary';
 })
 export class SummryComponent implements OnInit {
 
-  summaryData: Summary;
+  summaryData: SummuryDTO;
   private uuid = 'c2f7c415-7107-4d3d-8c2f-bb43a3c4ca1a';
 
   constructor(private service: SummuryService) {
     this.service.getSummary().subscribe(x => {
+      // @ts-ignore
       this.summaryData = x.data.summuryDto;
     });
   }

@@ -6,6 +6,8 @@ import {TransferLog} from '../interface/TransferLog';
 })
 export class TransferlogService {
 
+  // searchCriteria: 
+
   private logs: TransferLog[] = [
     {
       SessionID: 12,

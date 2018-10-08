@@ -3,10 +3,10 @@
     <img src="assets/img/logo.png" alt="AMAN">
   </div>
   <div class="sidebar-title">
-    <p>Recharg Automation</p>
+    <p style="padding-left: 54px;">Recharge Tool</p>
   </div>
 
-  <ul *ngIf="login" class="list-unstyled components">
+  <ul *ngIf="isLogin" class="list-unstyled components">
 
 
     <li routerLink="/transfer" routerLinkActive="active">
@@ -20,17 +20,17 @@
 
   <ul class="list-unstyled buttons">
     <li>
-      <a *ngIf="login" routerLink="/change-password" class="btn-bleu">Change Password</a>
+      <a *ngIf="isLogin" routerLink="/change-password" class="btn-bleu">Change Password</a>
     </li>
     <li>
-      <a *ngIf="login" routerLink="/change-terminal" class="btn-bleu">Change Terminal</a>
+      <a *ngIf="isLogin" routerLink="/change-terminal" class="btn-bleu">Change Terminal</a>
     </li>
     <li>
-      <a *ngIf="login" routerLink="/logout" class="btn-white">Logout</a>
+      <a *ngIf="isLogin" routerLink="/logout" class="btn-white">Logout</a>
     </li>
 
     <li>
-      <a *ngIf="!login" routerLink="/login" class="btn-white">Login</a>
+      <a *ngIf="!isLogin" routerLink="/login" class="btn-white">Login</a>
     </li>
 
   </ul>
