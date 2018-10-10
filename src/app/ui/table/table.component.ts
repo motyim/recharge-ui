@@ -3,6 +3,7 @@ import {TransferLog} from '../../interface/TransferLog';
 import {TransferlogService} from '../../service/transferlog.service';
 import { SearchServiceService } from '../../service/search-service.service';
 import { LogDTO } from '../../interface/LogDTO';
+import {ExcelService} from '../../service/excel.service';
 
 @Component({
   selector: 'app-table',
@@ -13,7 +14,7 @@ export class TableComponent implements OnInit {
 
    transferlog: LogDTO [];
    pageNumber: number;
-  constructor(private transferlogService: TransferlogService, private searchService: SearchServiceService) {
+  constructor(private transferlogService: TransferlogService, private searchService: SearchServiceService, private excelService: ExcelService) {
     this.pageNumber = 0;
    }
 
@@ -32,5 +33,9 @@ export class TableComponent implements OnInit {
     console.log('Test Next' + this.pageNumber);
     this.pageNumber = this.pageNumber + 1;
     this.searchService.doSearchPage(this.pageNumber);
+  }
+
+  exportAsXLSX(): void {
+    this.excelService.exportAsExcelFile(this.searchService.logsDTO, 'aman');
   }
 }
