@@ -3,17 +3,17 @@
     <p>Configer Account</p>
     <div class="form-group">
       <label for="terminalID">Terminal ID</label>
-      <input type="text" class="form-control" id="terminalID" placeholder="Terminal ID">
+      <input [(ngModel)]="terminalConfig.terminalId" name="terminalId" type="text" class="form-control" id="terminalID" placeholder="Terminal ID">
     </div>
     <div class="form-group">
       <label for="pin">PIN</label>
-      <input type="password" class="form-control" id="pin" placeholder="PIN">
+      <input [(ngModel)]="terminalConfig.terminalPIN" name="terminalPIN" type="password" class="form-control" id="pin" placeholder="PIN">
     </div>
     <div class="form-group">
       <label for="desc">Description</label>
-      <input type="text" class="form-control" id="desc" placeholder="Description">
+      <input [(ngModel)]="terminalConfig.description" name="description" type="text" class="form-control" id="desc" placeholder="Description">
     </div>
 
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button (click)="submit()" type="submit" class="btn btn-primary">Save</button>
   </form>
 </div>

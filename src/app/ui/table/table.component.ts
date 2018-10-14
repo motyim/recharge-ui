@@ -13,9 +13,10 @@ import {ExcelService} from '../../service/excel.service';
 export class TableComponent implements OnInit {
 
    transferlog: LogDTO [];
-   pageNumber: number;
-  constructor(private transferlogService: TransferlogService, private searchService: SearchServiceService, private excelService: ExcelService) {
-    this.pageNumber = 0;
+  //  pageNumber: number;
+  constructor(private transferlogService: TransferlogService
+    , public searchService: SearchServiceService, private excelService: ExcelService) {
+    // this.pageNumber = 0;
    }
 
 
@@ -24,15 +25,19 @@ export class TableComponent implements OnInit {
   }
 
   previous(): void {
-    console.log('Test Pervious' + this.pageNumber);
-    this.pageNumber === 0 ? this.pageNumber = 0 : this.pageNumber = this.pageNumber - 1 ;
-    this.searchService.doSearchPage(this.pageNumber);
+    // console.log('Test Pervious' + this.pageNumber);
+    // this.pageNumber === 0 ? this.pageNumber = 0 : this.pageNumber = this.pageNumber - 1 ;
+    // console.log('Test Pervious' + this.pageNumber);
+    this.searchService.doSearchPage(-1);
+    // console.log('Test Pervious' + this.pageNumber);
   }
 
   next(): void {
-    console.log('Test Next' + this.pageNumber);
-    this.pageNumber = this.pageNumber + 1;
-    this.searchService.doSearchPage(this.pageNumber);
+    // console.log('Test Next' + this.pageNumber);
+    // this.pageNumber = this.pageNumber + 1;
+    // console.log('Test Next' + this.pageNumber);
+    this.searchService.doSearchPage(1);
+    // console.log('Test Next' + this.pageNumber);
   }
 
   exportAsXLSX(): void {

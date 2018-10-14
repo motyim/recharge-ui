@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SessionStorageService } from 'ngx-webstorage';
 import { Router } from '@angular/router';
+import {LoginService} from '../../service/login.service';
 
 @Component({
   selector: 'app-logout',
@@ -9,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private router: Router ,private session: SessionStorageService) {
+  constructor(private login: LoginService , private router: Router) {
     console.log('Cleaaaaaaaaaaaaaaaaaaaaaaaaaaaaar');
-    session.clear();
-    this.router.navigate(['/login']);
+    login.setLogout();
+    this.router.navigate(['login']);
   }
 
   ngOnInit() {

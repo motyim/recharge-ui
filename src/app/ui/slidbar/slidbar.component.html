@@ -9,10 +9,10 @@
   <ul *ngIf="isLogin" class="list-unstyled components">
 
 
-    <li routerLink="/transfer" routerLinkActive="active">
+    <li routerLink="transfer" routerLinkActive="active">
       <a>Bulk Transfers</a>
     </li>
-    <li routerLink="/log" routerLinkActive="active">
+    <li routerLink="log" routerLinkActive="active">
       <a>View Log</a>
     </li>
 
@@ -20,17 +20,17 @@
 
   <ul class="list-unstyled buttons">
     <li>
-      <a *ngIf="isLogin" routerLink="/change-password" class="btn-bleu">Change Password</a>
+      <a *ngIf="isLogin" routerLink="change-password" class="btn-bleu">Change Password</a>
     </li>
     <li>
-      <a *ngIf="isLogin" routerLink="/change-terminal" class="btn-bleu">Change Terminal</a>
+      <a *ngIf="isLogin" routerLink="change-terminal" class="btn-bleu">Change Terminal</a>
     </li>
     <li>
-      <a *ngIf="isLogin" routerLink="/logout" class="btn-white">Logout</a>
+      <a *ngIf="isLogin" routerLink="logout" class="btn-white">Logout</a>
     </li>
 
     <li>
-      <a *ngIf="!isLogin" routerLink="/login" class="btn-white">Login</a>
+      <a *ngIf="!isLogin" routerLink="login" class="btn-white">Login</a>
     </li>
 
   </ul>

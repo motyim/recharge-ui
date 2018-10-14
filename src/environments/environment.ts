@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
+  // baseUrl: 'http://172.16.88.7:9091/rechargebackend'
   baseUrl: 'http://10.140.173.16:15732/'
-  // baseUrl: 'http://172.21.5.130:15732/'
 };
 
 /*

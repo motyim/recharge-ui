@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../interface/User';
 import { HttpClient } from '@angular/common/http';
-import { Acknowledge } from '../interface/Acknowledge';
-import { Router } from '@angular/router';
-import {environment} from '../../environments/environment';
+import { environment} from '../../environments/environment';
 import { SessionStorageService } from 'ngx-webstorage';
 import { Subject } from 'rxjs/Subject';
 
@@ -12,45 +10,44 @@ import { Subject } from 'rxjs/Subject';
 })
 export class LoginService {
   private serverURL = environment.baseUrl;
-  loggedIn: Boolean = false;
+  private loggedIn = false;
+  user: User;
   public islogginSubject = new Subject<boolean>();
-  constructor(private http: HttpClient, private router: Router, private session: SessionStorageService) { }
+  constructor(private http: HttpClient, private session: SessionStorageService) {}
 
-  doLogin(user: User): void {
-    this.http.post<User>(this.serverURL + 'login', user, {withCredentials : true}).subscribe(loggedUser => {
-      console.log(loggedUser);
-      this.loggedIn = true;
-      console.log('saved user ');
-      console.log(user);
-      this.setLoginSubject(true);
-      this.session.store('user' , user );
-      this.router.navigate(['/log']);
-    });
+
+  doLogin(user: User) {
+    return this.http.post<User>(this.serverURL + 'login', user, {withCredentials : true});
   }
 
-  isLoggedIn(): void {
-    console.log('>>> this is loginIn Test ... ');
-    this.http.get<Acknowledge>(this.serverURL + 'login', {withCredentials : true}).subscribe(ack => {
-      console.log(ack);
-      if (ack.data.loggedIn !== true) {
-        console.log(ack.data.loggedIn);
-        this.setLoginSubject(false);
-        this.router.navigate(['/login']);
-      }
-    });
+  isLoggedIn(): boolean {
+    return this.loggedIn;
   }
 
   errorHandler(result): void {
     console.log('>>> Testing error hanlding' + result);
     console.log(result);
-    if (result.error.data.loggedIn === false) {
-      this.loggedIn = false;
-      this.setLoginSubject(false);
-      this.router.navigate(['/login']);
+    if (result.error.data == null || result.error.data.loggedIn === false) {
+      this.setLogout();
     }
   }
 
   setLoginSubject(value: boolean) {
     this.islogginSubject.next(value);
+  }
+
+  setLogout(): void {
+    this.loggedIn = false;
+    this.setLoginSubject(false);
+    this.session.clear();
+    console.log(' Login service logout');
+  }
+
+  setUserLogin(loggedUser: User): void {
+    this.loggedIn = true;
+    this.user = loggedUser;
+    this.setLoginSubject(true);
+    this.session.store('user' , this.user );
+    console.log('all user data are saved');
   }
 }

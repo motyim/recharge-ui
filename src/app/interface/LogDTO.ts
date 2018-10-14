@@ -9,4 +9,5 @@ export interface LogDTO {
 	depositDate: Date;
 	rejectionReason: string;
 	transferAmount: number;
+	pageSize: number;
 }

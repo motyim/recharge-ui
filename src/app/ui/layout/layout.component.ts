@@ -13,6 +13,8 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
+    // @ts-ignore
+    this.loginService.isLoggedIn();
   }
 
 }

@@ -25,7 +25,8 @@ export class TransfersComponent implements OnInit {
     this.URL = environment.baseUrl + 'bulktransfer';
     this.fileChooser = 'Select Deposits Datasheet';
     this.TerminalID = 80006;
-    this.uploader = new FileUploader({url: this.URL, itemAlias: 'file', queueLimit: 1});
+    // @ts-ignore
+    this.uploader = new FileUploader({url: this.URL, itemAlias: 'file', queueLimit: 1,  withCredentials : true});
     this.uploadError = false;
     this.uploadSuccess = false;
     //check login
@@ -34,7 +35,7 @@ export class TransfersComponent implements OnInit {
 
   ngOnInit() {
     this.uploader.onAfterAddingFile = (file) => {
-      file.withCredentials = false;
+      file.withCredentials = true;
     };
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       console.log('FileUpload:uploaded:', item, status, response);

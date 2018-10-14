@@ -11,8 +11,9 @@ import {LogComponent} from './log/log.component';
 import {SearchComponent} from './search/search.component';
 import {TableComponent} from './table/table.component';
 import {AppRoutingModule} from './app-routing.module';
-import {FileSelectDirective} from 'ng2-file-upload';
+import {FileSelectDirective, FileUploadModule} from 'ng2-file-upload';
 import { FormsModule } from '@angular/forms';
+import { ChangePasswordComponent } from './change-password/change-password.component';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { LogoutComponent } from './logout/logout.component';
 
@@ -21,10 +22,12 @@ import { LogoutComponent } from './logout/logout.component';
     CommonModule,
     AppRoutingModule,
     FormsModule,
-    Ng2Webstorage
+    Ng2Webstorage,
+    FileUploadModule,
   ],
   exports: [LayoutComponent],
-  declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent, SummryComponent, LogComponent, SearchComponent, TableComponent, FileSelectDirective, LogoutComponent]
+  declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent
+    , SummryComponent, LogComponent, SearchComponent, TableComponent, ChangePasswordComponent, LogoutComponent]
 })
 export class UiModule {
 }
