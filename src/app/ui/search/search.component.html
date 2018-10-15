@@ -6,17 +6,17 @@
     <div class="form-row">
       <div class="col-lg-2 mb-3">
         <label for="SessionID">Session ID</label>
-        <input [(ngModel)]="sessionId" name="sessionId" type="text" class="form-control" id="SessionID" placeholder="Session ID" required>
+        <input [(ngModel)]="sessionId" name="sessionId" type="text" class="form-control" id="SessionID" placeholder="Session ID" required (change)="search()">
       </div>
 
       <div class="col-lg-2 mb-3">
         <label for="TerminalID">Terminal ID</label>
-        <input [(ngModel)]="terminalId" name="terminalId" type="text" class="form-control" id="TerminalID" placeholder="Terminal ID" required>
+        <input [(ngModel)]="terminalId" name="terminalId" type="text" class="form-control" id="TerminalID" placeholder="Terminal ID" required (change)="search()">
       </div>
 
       <div class="col-lg-2 mb-3">
         <label for="status">Status</label>
-        <select [(ngModel)]="status" name="status" class="form-control" id="status">
+        <select [(ngModel)]="status" name="status" class="form-control" id="status" (change)="search()">
           <option></option>
           <option *ngFor="let status of statuses">{{status.status}}</option>
           
@@ -25,7 +25,7 @@
 
       <div class="col-lg-2 mb-3">
         <label for="bulkname">Bank name</label>
-        <select [(ngModel)]="bankName" name="bankName" class="form-control" id="bulkname">
+        <select [(ngModel)]="bankName" name="bankName" class="form-control" id="bulkname" (change)="search()">
           <option></option>
           <option *ngFor="let bank of banks">{{bank.bankName}}</option>
           
@@ -35,21 +35,13 @@
 
       <div class="col-lg-2 mb-3">
         <label for="from">From</label>
-        <input [(ngModel)]="fromDate" name="fromDate" type="date" name="form" id="from" class="form-control"/>
+        <input [(ngModel)]="fromDate" name="fromDate" type="date" name="form" id="from" class="form-control" (change)="search()"/>
       </div>
 
       <div class="col-lg-2 mb-3">
         <label for="to">To</label>
-        <input [(ngModel)]="toDate" name="toDate" type="date" name="to" id="to" class="form-control"/>
+        <input [(ngModel)]="toDate" name="toDate" type="date" name="to" id="to" class="form-control" (change)="search()"/>
       </div>
-
-      <div class="col-lg-1 mb-3">
-      <button (click)="doSearch()" type="submit" class="btn btn-primary btn-search">Search</button>
-      </div>
-
-      <!--<div class="col-lg-1 mb-3"> (click)="doSearch()"-->
-      <!--<button type="button" class="btn btn-dark btn-search">Export</button>-->
-      <!--</div>-->
 
 
     </div>

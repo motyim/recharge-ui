@@ -4,21 +4,25 @@
   <table>
     <tr>
       <td>Session ID</td>
-      <td>{{summaryData.sessionId}}</td>
+      <td>{{summaryData?.sessionId}}</td>
     </tr>
     <tr>
       <td>Total Processed Record</td>
-      <td>{{summaryData.totalProcessed}}</td>
+      <td>{{summaryData?.totalProcessed}}</td>
     </tr>
     <tr>
       <td>Committed Transfers</td>
-      <td>{{summaryData.commitedTransfers}}</td>
+      <td>{{summaryData?.commitedTransfers}}</td>
     </tr>
     <tr>
       <td>Rejected Transfers</td>
-      <td>{{summaryData.rejectedTransfers}}</td>
+      <td>{{summaryData?.rejectedTransfers}}</td>
+    </tr>
+    <tr>
+      <td>Duplicate Transfers</td>
+      <td>{{summaryData?.duplicateTransfers}}</td>
     </tr>
   </table>
   <br>
-  <button class="btn btn-primary btn-block" routerLink="log"> Detailed Log</button>
+  <button class="btn btn-primary btn-block" routerLink="/log"> Detailed Log</button>
 </div>

@@ -10,7 +10,6 @@ import {SummuryDTO} from '../../interface/SummuryDTO';
 export class SummryComponent implements OnInit {
 
   summaryData: SummuryDTO;
-  private uuid = 'c2f7c415-7107-4d3d-8c2f-bb43a3c4ca1a';
 
   constructor(private service: SummuryService) {
     this.service.getSummary().subscribe(x => {

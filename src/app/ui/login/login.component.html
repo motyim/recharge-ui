@@ -1,5 +1,8 @@
 <div class="jumbotron vertical-center">
   <form>
+    <div class="alert alert-danger" role="alert" *ngIf="error">
+      <strong>Sorry !</strong> username or password incorrect.
+    </div>
     <div class="form-group">
       <label for="username">Username</label>
       <input [(ngModel)]="user.userName" name="userName" type="text" class="form-control" id="username" placeholder="Please Enter Username">

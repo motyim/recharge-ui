@@ -1,5 +1,4 @@
-import {Component, OnInit , OnChanges, Input , SimpleChange } from '@angular/core';
-import {SessionStorageService} from 'ngx-webstorage';
+import {Component, OnInit } from '@angular/core';
 import {LoginService} from '../../service/login.service';
 
 @Component({
@@ -7,13 +6,11 @@ import {LoginService} from '../../service/login.service';
   templateUrl: './slidbar.component.html',
   styleUrls: ['./slidbar.component.css']
 })
-export class SlidbarComponent implements OnInit , OnChanges  {
+export class SlidbarComponent implements OnInit {
 
   isLogin: boolean ;
 
-  constructor(private login: LoginService) {
-    console.log('Slider ::' + this.isLogin);
-  }
+  constructor(private login: LoginService) {}
 
   ngOnInit() {
     this.login.islogginSubject.subscribe(
@@ -21,14 +18,6 @@ export class SlidbarComponent implements OnInit , OnChanges  {
         this.isLogin = message;
       }
     );
-    // console.log('slider init');
-    // const user = this.session.retrieve('user');
-    // this.isLogin = user !== null && user.hasOwnProperty('password');
-    // console.log('Slider- init ::' + this.isLogin);
-  }
-
-  ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
-    console.log('CHAAAAAAAAAAAAAAAAAAANG');
   }
 
 }

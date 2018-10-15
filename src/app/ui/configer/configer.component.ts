@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { User } from '../../interface/User';
-import { SessionService } from '../../service/session.service';
-import {LoginService} from '../../service/login.service';
+import {ConfigTerminalService} from '../../service/config-terminal.service';
+import {SessionService} from '../../service/session.service';
 
 @Component({
   selector: 'app-configer',
@@ -11,18 +11,24 @@ import {LoginService} from '../../service/login.service';
 export class ConfigerComponent implements OnInit {
 
   terminalConfig: User;
-
-  constructor(private sessionService: SessionService, private login: LoginService) {
+  configered: number ;
+  constructor(private configService: ConfigTerminalService, private session: SessionService) {
     // @ts-ignore
     this.terminalConfig = {};
-    login.isLoggedIn();
   }
 
   ngOnInit() {
   }
 
   submit(): void {
-    console.log('Test config' + this.terminalConfig.terminalId + this.terminalConfig.terminalPIN);
-    this.sessionService.submit(this.terminalConfig);
+    this.configService.submit(this.terminalConfig).subscribe(ack => {
+      // @ts-ignore
+      if (ack.data.loggedIn === true) {
+        this.session.save(ack.data.user);
+        this.configered = 1;
+      } else {
+        this.configered = -1;
+      }
+    });
   }
 }

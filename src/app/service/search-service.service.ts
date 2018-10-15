@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClientModule, HttpClient, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { Acknowledge } from '../interface/Acknowledge';
 import { LogDTO } from '../interface/LogDTO';
 import { LoginService } from './login.service';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
-
+import { NGXLogger } from 'ngx-logger';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +17,7 @@ export class SearchServiceService {
   logDTO: LogDTO;
   pageSize: number;
   pageNumber: number;
-  constructor(private http: HttpClient, private loginService: LoginService) {
+  constructor(private http: HttpClient, private loginService: LoginService, private logger: NGXLogger) {
     this.pageSize = 10;
     this.pageNumber = 0;
   }
@@ -39,7 +39,7 @@ export class SearchServiceService {
   }
 
   doSearch(logDTO: LogDTO): void {
-    console.log('Page Number' + this.pageNumber);
+    this.logger.info('Page Number' + this.pageNumber);
     this.pageNumber = 0;
     logDTO.pageNumber = 0;
     logDTO.pageSize = 10;
@@ -51,11 +51,11 @@ export class SearchServiceService {
       // @ts-ignore
       this.logsDTO = ack.data.logList;
     });
-    console.log('Page Number' + this.pageNumber);
+    this.logger.info('Page Number' + this.pageNumber);
   }
 
   doSearchPage(pageNumber: number): number {
-    console.log('Page Number' + this.pageNumber);
+    this.logger.info('Page Number' + this.pageNumber);
     if (pageNumber > 0) {
       this.pageNumber += 1;
     } else {
@@ -66,13 +66,13 @@ export class SearchServiceService {
       }
     }
     if (this.logDTO !== undefined) {
-      console.log('Page Number' + this.pageNumber);
+      this.logger.info('Page Number' + this.pageNumber);
       this.logDTO.pageNumber = this.pageNumber;
       this.http.post<Acknowledge>(this.serverURL + 'getLog', this.logDTO, { withCredentials: true }).pipe(
         // @ts-ignore
         catchError((error: any, caught: Observable<HttpEvent<any>>) => this.loginService.errorHandler(error))
       ).subscribe(ack => {
-        console.log('Data fetched page Number ' + this.pageNumber);
+        this.logger.info('Data fetched page Number ' + this.pageNumber);
         // @ts-ignore
         if (ack.data.logList.length < 1) {
           this.pageNumber -= 1;
@@ -81,10 +81,10 @@ export class SearchServiceService {
           this.logsDTO = ack.data.logList;
         }
       });
-      console.log('Page Number' + this.pageNumber);
+      this.logger.info('Page Number' + this.pageNumber);
       return pageNumber;
     } else {
-      console.log('Page Number' + this.pageNumber);
+      this.logger.info('Page Number' + this.pageNumber);
       this.pageNumber = 0;
       return 0;
     }

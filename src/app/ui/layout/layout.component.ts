@@ -1,5 +1,4 @@
 import {Component, OnInit } from '@angular/core';
-import {LoginService} from '../../service/login.service';
 
 
 @Component({
@@ -13,8 +12,6 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    // @ts-ignore
-    this.loginService.isLoggedIn();
   }
 
 }

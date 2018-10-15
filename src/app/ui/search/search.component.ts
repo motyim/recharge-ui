@@ -1,8 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { SearchServiceService } from '../../service/search-service.service';
 import { Status } from '../../interface/Status';
 import { Banks } from '../../interface/Banks';
 import { LogDTO } from '../../interface/LogDTO';
+import {SessionService} from '../../service/session.service';
 
 @Component({
   selector: 'app-search',
@@ -20,7 +21,8 @@ export class SearchComponent implements OnInit {
   fromDate: Date;
   toDate: Date;
   logDTO: LogDTO ;
-  constructor(private searchService: SearchServiceService) {
+  constructor(private searchService: SearchServiceService , private session: SessionService) {
+    this.sessionId = session.getSessionId();
     // @ts-ignore
     this.logDTO = {};
   }
@@ -40,7 +42,7 @@ export class SearchComponent implements OnInit {
     this.banks = acknowleadge.data.banks);
   }
 
-  doSearch(): void {
+  search(): void {
     this.logDTO.sessionId = this.sessionId ;
     this.logDTO.terminalId = this.terminalId;
     this.logDTO.bankName = this.bankName;
@@ -49,5 +51,4 @@ export class SearchComponent implements OnInit {
     this.logDTO.fromDate = this.fromDate;
     this.searchService.doSearch(this.logDTO);
   }
-
 }

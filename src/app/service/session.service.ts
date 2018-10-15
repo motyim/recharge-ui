@@ -1,12 +1,6 @@
 import {Injectable} from '@angular/core';
 import { User } from '../interface/User';
-import { HttpClient, HttpEvent } from '@angular/common/http';
-import { Acknowledge } from '../interface/Acknowledge';
-import { LoginService } from './login.service';
-import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment';
+import { SessionStorageService } from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
@@ -14,10 +8,9 @@ import { environment } from '../../environments/environment';
 export class SessionService {
 
   private sessionID: string;
-  private serverURL = environment.baseUrl;
+  private _user: User ;
 
-  constructor(private http: HttpClient, private loginService: LoginService
-                , private router: Router) {
+  constructor(private sessionStorage: SessionStorageService) {
   }
 
   setSessionId(sessionID: string): void {
@@ -28,41 +21,25 @@ export class SessionService {
     return this.sessionID;
   }
 
-  submit(user: User): void {
-    console.log('Test config');
-    this.http.post<Acknowledge>(this.serverURL + 'config', user, {withCredentials : true}).pipe(
-      // @ts-ignore
-      catchError((error: any, caught: Observable<HttpEvent<any>>) => this.loginService.errorHandler(error))
-    ).subscribe(ack => {
-      console.log('Test config');
-      // @ts-ignore
-      if (ack.data.loggedIn === true) {
-        // @ts-ignore
-        this.loginService.user = ack.data.user;
-        this.router.navigateByUrl('log');
-      } else {
-        console.log('Test config');
-        this.router.navigateByUrl('login');
-      }
-    });
+
+  get user(): User {
+    return this._user;
   }
 
-  changePassword(newPassword: string): void {
-    const user = this.loginService.user;
-    user.newPassword = newPassword;
-    this.http.post<Acknowledge>(this.serverURL + 'changePassword', user, {withCredentials : true}).pipe(
-      // @ts-ignore
-      catchError((error: any, caught: Observable<HttpEvent<any>>) => this.loginService.errorHandler(error))
-    ).subscribe(ack => {
-      // @ts-ignore
-      if (ack.data.loggedIn === true) {
-        // @ts-ignore
-        this.loginService.user = ack.data.user;
-        this.router.navigateByUrl('log');
-      } else {
-        this.router.navigateByUrl('login');
-      }
-    });
+  set user(value: User) {
+    this._user = value;
   }
 
+  save(user: User): void {
+    this.sessionStorage.store('user' , user);
+    this._user = user;
+  }
+  clear(): void {
+    this.user = null;
+    this.sessionStorage.clear();
+  }
+
+  getUserTerminal(): string {
+    return this.user.terminalId;
+  }
 }

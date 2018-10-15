@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { User } from '../../interface/User';
 import { LoginService } from '../../service/login.service';
 import { Router } from '@angular/router';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-login',
@@ -11,21 +12,21 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
 
   user: User ;
-
-  constructor(private router: Router, private loginService: LoginService) {
+  error: boolean ;
+  constructor(private router: Router, private loginService: LoginService, private logger: NGXLogger) {
     // @ts-ignore
     this.user = {};
+    this.error = false ;
   }
 
   login(): void {
-    console.log('Will Call Loging >>> ');
-    console.log(this.user);
+    this.logger.info('Start Loging Proccess' , this.user);
     this.loginService.doLogin(this.user).subscribe(loggedUser => {
-      console.log(loggedUser);
       this.loginService.setUserLogin(loggedUser);
-      console.log('saved user ');
+      this.logger.info('Save User | ' , loggedUser);
       this.router.navigate(['log']);
-    });
+    },
+      error => this.error = true );
   }
 
   ngOnInit() {}

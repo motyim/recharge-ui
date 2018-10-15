@@ -11,11 +11,12 @@ import {LogComponent} from './log/log.component';
 import {SearchComponent} from './search/search.component';
 import {TableComponent} from './table/table.component';
 import {AppRoutingModule} from './app-routing.module';
-import {FileSelectDirective, FileUploadModule} from 'ng2-file-upload';
+import {FileUploadModule} from 'ng2-file-upload';
 import { FormsModule } from '@angular/forms';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { LogoutComponent } from './logout/logout.component';
+import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import { LogoutComponent } from './logout/logout.component';
     FormsModule,
     Ng2Webstorage,
     FileUploadModule,
+    LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
   ],
   exports: [LayoutComponent],
   declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent

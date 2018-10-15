@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../interface/User';
-import { SessionService } from '../../service/session.service';
+import {PasswordService} from '../../service/password.service';
+import { NGXLogger } from 'ngx-logger';
 
 @Component({
   selector: 'app-change-password',
@@ -9,16 +9,26 @@ import { SessionService } from '../../service/session.service';
 })
 export class ChangePasswordComponent implements OnInit {
 
+  changed: number;
   newPassword: string;
   confirmPassword: string;
-  constructor(private sessionService: SessionService) { }
+  constructor(private passwordService: PasswordService, private logger: NGXLogger) { }
 
   ngOnInit() {
   }
 
   change(): void {
     if (this.newPassword !== undefined && this.confirmPassword !== undefined && this.confirmPassword === this.newPassword) {
-      this.sessionService.changePassword(this.newPassword);
+      this.passwordService.changePassword(this.newPassword).subscribe(ack => {
+        this.logger.info('ChangePassword Component', ack);
+        if (ack.data.loggedIn === true) {
+          this.changed = 1 ;
+        } else {
+          this.changed = -1 ;
+        }
+      });
+    } else {
+      this.changed = -2 ;
     }
   }
 

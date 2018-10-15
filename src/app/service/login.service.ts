@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import { User } from '../interface/User';
 import { HttpClient } from '@angular/common/http';
 import { environment} from '../../environments/environment';
-import { SessionStorageService } from 'ngx-webstorage';
 import { Subject } from 'rxjs/Subject';
+import {SessionService} from './session.service';
+import { NGXLogger } from 'ngx-logger';
 
 @Injectable({
   providedIn: 'root'
@@ -11,9 +12,8 @@ import { Subject } from 'rxjs/Subject';
 export class LoginService {
   private serverURL = environment.baseUrl;
   private loggedIn = false;
-  user: User;
   public islogginSubject = new Subject<boolean>();
-  constructor(private http: HttpClient, private session: SessionStorageService) {}
+  constructor(private http: HttpClient, private session: SessionService, private logger: NGXLogger) {}
 
 
   doLogin(user: User) {
@@ -25,8 +25,7 @@ export class LoginService {
   }
 
   errorHandler(result): void {
-    console.log('>>> Testing error hanlding' + result);
-    console.log(result);
+    this.logger.info('Testing error hanlding' , result);
     if (result.error.data == null || result.error.data.loggedIn === false) {
       this.setLogout();
     }
@@ -37,17 +36,17 @@ export class LoginService {
   }
 
   setLogout(): void {
+    this.session.clear();
     this.loggedIn = false;
     this.setLoginSubject(false);
-    this.session.clear();
-    console.log(' Login service logout');
+    this.logger.info('Login service logout');
   }
 
   setUserLogin(loggedUser: User): void {
+    this.session.save(loggedUser);
     this.loggedIn = true;
-    this.user = loggedUser;
     this.setLoginSubject(true);
-    this.session.store('user' , this.user );
-    console.log('all user data are saved');
+    this.logger.info('User Loged In Successfully');
   }
+
 }

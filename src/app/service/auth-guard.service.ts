@@ -10,7 +10,6 @@ export class AuthGuardService implements CanActivate {
   constructor(public auth: LoginService, public router: Router) {}
 
   canActivate(): boolean {
-    console.log('GUAED :: ' + this.auth.isLoggedIn());
     if (!this.auth.isLoggedIn()) {
       this.router.navigate(['login']);
       return false;
