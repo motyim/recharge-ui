@@ -12,12 +12,10 @@ export class ConfigerComponent implements OnInit {
 
   terminalConfig: User;
   configered: number ;
-  constructor(private configService: ConfigTerminalService, private session: SessionService) {
-    // @ts-ignore
-    this.terminalConfig = {};
-  }
+  constructor(private configService: ConfigTerminalService, private session: SessionService) {}
 
   ngOnInit() {
+    this.terminalConfig = this.session.user;
   }
 
   submit(): void {
