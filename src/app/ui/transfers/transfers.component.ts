@@ -20,7 +20,7 @@ export class TransfersComponent implements OnInit {
   public uploader: FileUploader;
   uploadError: boolean;
   uploadSuccess: boolean;
-
+  errorMessage : string ;
   constructor(private session: SessionService ,  private logger: NGXLogger ) {
     this.URL = environment.baseUrl + 'bulktransfer';
     this.fileChooser = 'Select Deposits Datasheet';
@@ -41,6 +41,12 @@ export class TransfersComponent implements OnInit {
         case 500:
           this.uploadError = true;
           this.uploadSuccess = false;
+          this.errorMessage = 'Error in server please try again later ';
+          break;
+        case 400:
+          this.uploadError = true;
+          this.uploadSuccess = false;
+          this.errorMessage = 'Please Upload Correct Deposits Datasheet With ( XLXS ) Format';
           break;
         case 200:
           this.uploadSuccess = true;
