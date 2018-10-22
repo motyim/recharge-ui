@@ -17,6 +17,7 @@ import { ChangePasswordComponent } from './change-password/change-password.compo
 import {Ng2Webstorage} from 'ngx-webstorage';
 import { LogoutComponent } from './logout/logout.component';
 import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
     Ng2Webstorage,
     FileUploadModule,
     LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
+    NgxPaginationModule
   ],
   exports: [LayoutComponent],
   declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent

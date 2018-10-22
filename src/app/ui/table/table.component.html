@@ -14,7 +14,7 @@
     </thead>
     <tbody>
 
-    <tr *ngFor="let log of searchService.logsDTO " >
+    <tr *ngFor="let log of searchService.logsDTO | paginate: { itemsPerPage: 10, currentPage: page }" >
       <td scope="row">{{log.sessionId}}</td>
       <td>{{log.bankName}}</td>
       <td>{{log.terminalId}}</td>
@@ -33,9 +33,7 @@
     <div class="container">
       <span class="text-muted pointer" (click)="clear()"> <i class="fas fa-trash"></i> Clear</span> |
       <span class="text-muted pointer" (click)="exportAsXLSX()"> <i class="fas fa-file-export"></i> Export</span> |
-      <span class="text-muted pointer" (click)="previous()"> <i class="fas fa-arrow-left"></i> previous</span> |
-      <span class="text-muted pointer">{{this.searchService.pageNumber}}</span> |
-      <span class="text-muted pointer" (click)="next()"> Next <i class="fas fa-arrow-right"></i></span>
+      <pagination-controls class="text-muted pointer" (pageChange)="page = $event"></pagination-controls>
     </div>
   </footer>
 

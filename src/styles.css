@@ -27,3 +27,8 @@ a:focus {
   border-bottom: 1px dashed #ddd;
   margin: 40px 0;
 }
+
+.ngx-pagination {
+  display: inline-block;
+   margin-bottom: 0 !important;
+}
