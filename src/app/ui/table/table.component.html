@@ -31,7 +31,7 @@
 
   <footer class="footer">
     <div class="container">
-      <span class="text-muted pointer"> <i class="fas fa-trash"></i> Clear</span> |
+      <span class="text-muted pointer" (click)="clear()"> <i class="fas fa-trash"></i> Clear</span> |
       <span class="text-muted pointer" (click)="exportAsXLSX()"> <i class="fas fa-file-export"></i> Export</span> |
       <span class="text-muted pointer" (click)="previous()"> <i class="fas fa-arrow-left"></i> previous</span> |
       <span class="text-muted pointer">{{this.searchService.pageNumber}}</span> |

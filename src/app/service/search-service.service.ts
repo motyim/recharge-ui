@@ -15,6 +15,7 @@ export class SearchServiceService {
   private serverURL = environment.baseUrl;
   logsDTO: LogDTO[] = [];
   logDTO: LogDTO;
+  exportDto: LogDTO[] = [];
   pageSize: number;
   pageNumber: number;
   constructor(private http: HttpClient, private loginService: LoginService, private logger: NGXLogger) {
@@ -39,9 +40,14 @@ export class SearchServiceService {
   }
 
   doSearch(logDTO: LogDTO): void {
-    this.logger.info('Page Number' + this.pageNumber);
+    this.logger.info('DoSearch ' , logDTO);
     this.pageNumber = 0;
     logDTO.pageNumber = 0;
+    logDTO.pageSize = -1;
+    // make post request to get all record to be exported
+    this.http.post<Acknowledge>(this.serverURL + 'getLog', logDTO, { withCredentials: true }).subscribe(ack => {
+      this.exportDto = ack.data.logList;
+    });
     logDTO.pageSize = 10;
     this.logDTO = logDTO;
     this.http.post<Acknowledge>(this.serverURL + 'getLog', logDTO, { withCredentials: true }).pipe(
@@ -51,10 +57,11 @@ export class SearchServiceService {
       // @ts-ignore
       this.logsDTO = ack.data.logList;
     });
-    this.logger.info('Page Number' + this.pageNumber);
+    this.logger.info('Finish do Search ');
   }
 
   doSearchPage(pageNumber: number): number {
+    this.logger.info('DoSearchPage');
     this.logger.info('Page Number' + this.pageNumber);
     if (pageNumber > 0) {
       this.pageNumber += 1;

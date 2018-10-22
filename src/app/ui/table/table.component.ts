@@ -10,14 +10,12 @@ import {ExcelService} from '../../service/excel.service';
 })
 export class TableComponent implements OnInit {
 
-   transferlog: LogDTO [];
+
   constructor(public searchService: SearchServiceService, private excelService: ExcelService) {
    }
 
 
-  ngOnInit() {
-    this.transferlog = this.searchService.logsDTO;
-  }
+  ngOnInit() {}
 
   previous(): void {
     this.searchService.doSearchPage(-1);
@@ -28,6 +26,10 @@ export class TableComponent implements OnInit {
   }
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.searchService.logsDTO, 'aman');
+    this.excelService.exportAsExcelFile(this.searchService.exportDto, 'aman');
+  }
+
+  clear(): void {
+    this.searchService.logsDTO = [] ;
   }
 }
