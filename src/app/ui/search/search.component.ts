@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import { SearchServiceService } from '../../service/search-service.service';
 import { Status } from '../../interface/Status';
 import { Banks } from '../../interface/Banks';
@@ -10,7 +10,7 @@ import {SessionService} from '../../service/session.service';
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class SearchComponent implements OnInit, OnDestroy {
 
   statuses: Status[] = [];
   banks: Banks[] = [];
@@ -21,6 +21,7 @@ export class SearchComponent implements OnInit {
   fromDate: Date;
   toDate: Date;
   logDTO: LogDTO ;
+  
   constructor(private searchService: SearchServiceService , private session: SessionService) {
     this.sessionId = session.getSessionId();
     // @ts-ignore
@@ -30,6 +31,10 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.getStatus();
     this.getBanks();
+  }
+
+  ngOnDestroy(): void {
+    this.searchService.logsDTO = [] ;
   }
 
   getStatus(): void {

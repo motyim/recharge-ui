@@ -35,7 +35,7 @@ export class TransfersComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = true;
     };
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+    this.uploader.onCompleteItem = (item: any, response: Acknowledge, status: any, headers: any) => {
       this.logger.info('FileUpload:uploaded:', item, status, response);
       switch (status) {
         case 500:
@@ -46,7 +46,7 @@ export class TransfersComponent implements OnInit {
         case 400:
           this.uploadError = true;
           this.uploadSuccess = false;
-          this.errorMessage = 'Please Upload Correct Deposits Datasheet With ( XLXS ) Format';
+          this.errorMessage = (<Acknowledge> JSON.parse( response )).statusMessage;
           break;
         case 200:
           this.uploadSuccess = true;

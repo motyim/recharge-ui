@@ -44,4 +44,8 @@ export class SearchServiceService {
     });
     this.logger.info('Finish do Search ');
   }
+
+  isempty(): boolean {
+    return this.logsDTO.length === 0 ;
+  }
 }

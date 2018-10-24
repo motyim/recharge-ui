@@ -18,7 +18,9 @@ export class TableComponent implements OnInit {
   ngOnInit() {}
 
   exportAsXLSX(): void {
-    this.excelService.exportAsExcelFile(this.searchService.logsDTO, 'aman');
+    if (!this.searchService.isempty() ) {
+        this.excelService.exportAsExcelFile(this.searchService.logsDTO, 'aman');
+    }
   }
 
   clear(): void {

@@ -23,7 +23,6 @@
       <td>{{log.depositDate | date}}</td>
       <td>{{log.status}}</td>
       <td>{{log.rejectionReason}}</td>
-
     </tr>
 
     </tbody>
@@ -31,8 +30,13 @@
 
   <footer class="footer">
     <div class="container">
-      <span class="text-muted pointer" (click)="clear()"> <i class="fas fa-trash"></i> Clear</span> |
-      <span class="text-muted pointer" (click)="exportAsXLSX()"> <i class="fas fa-file-export"></i> Export</span> |
+      <div class="float-right">
+        <span [ngClass]="{'text-muted pointer' : !searchService.isempty() ,'deactive':searchService.isempty() }"
+              (click)="clear()"> <i class="fas fa-trash"></i> Clear</span>  |
+        <span [ngClass]="{'text-muted pointer' : !searchService.isempty() ,'deactive':searchService.isempty() }"
+              (click)="exportAsXLSX()"> <i class="fas fa-file-export"></i> Export</span>
+      </div>
+
       <pagination-controls class="text-muted pointer" (pageChange)="page = $event"></pagination-controls>
     </div>
   </footer>
