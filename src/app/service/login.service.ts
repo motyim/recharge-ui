@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { User } from '../interface/User';
-import { HttpClient } from '@angular/common/http';
-import { environment} from '../../environments/environment';
-import { Subject } from 'rxjs/Subject';
+import {Injectable} from '@angular/core';
+import {User} from '../interface/User';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {Subject} from 'rxjs/Subject';
 import {SessionService} from './session.service';
-import { NGXLogger } from 'ngx-logger';
+import {NGXLogger} from 'ngx-logger';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +15,12 @@ export class LoginService {
   public islogginSubject = new Subject<boolean>();
   constructor(private http: HttpClient, private session: SessionService, private logger: NGXLogger) {}
 
-
   doLogin(user: User) {
-    return this.http.post<User>(this.serverURL + 'login', user, {withCredentials : true});
+    const headers = new HttpHeaders().set('Content-Type', 'application/json')
+      .set('username', user.userName)
+      .set('password', user.password);
+    // return this.http.post(this.serverURL + 'login', user, {withCredentials : true, observe: 'response' });
+    return this.http.post(this.serverURL + 'login', user, {withCredentials: true, observe: 'response', headers: headers});
   }
 
   isLoggedIn(): boolean {

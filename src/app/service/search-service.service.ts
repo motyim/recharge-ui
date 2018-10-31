@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { HttpClient, HttpEvent } from '@angular/common/http';
-import { Acknowledge } from '../interface/Acknowledge';
-import { LogDTO } from '../interface/LogDTO';
-import { LoginService } from './login.service';
-import { catchError } from 'rxjs/operators';
-import { environment } from '../../environments/environment';
-import { NGXLogger } from 'ngx-logger';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {HttpClient, HttpEvent} from '@angular/common/http';
+import {Acknowledge} from '../interface/Acknowledge';
+import {LogDTO} from '../interface/LogDTO';
+import {LoginService} from './login.service';
+import {catchError} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
+import {NGXLogger} from 'ngx-logger';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +44,12 @@ export class SearchServiceService {
     });
     this.logger.info('Finish do Search ');
   }
+
+  getDates(logDTO: LogDTO) {
+    this.logger.info('getDates ', logDTO);
+    return this.http.post<Acknowledge>(this.serverURL + 'summury/date', logDTO, {withCredentials: true});
+  }
+
 
   isempty(): boolean {
     return this.logsDTO.length === 0 ;

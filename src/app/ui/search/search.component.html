@@ -5,8 +5,9 @@
   <form>
     <div class="form-row">
       <div class="col-lg-2 mb-3">
-        <label for="SessionID">Session ID</label>
-        <input [(ngModel)]="sessionId" name="sessionId" type="text" class="form-control" id="SessionID" placeholder="Session ID" required (change)="search()">
+        <label for="Username">Username</label>
+        <input [(ngModel)]="username" name="Username" type="text" class="form-control" id="Username"
+               placeholder="Username" required (change)="search()">
       </div>
 
       <div class="col-lg-2 mb-3">
@@ -34,13 +35,22 @@
 
 
       <div class="col-lg-2 mb-3">
-        <label for="from">From</label>
+        <label for="from">Deposit Date</label>
         <input [(ngModel)]="fromDate" name="fromDate" type="date" name="form" id="from" class="form-control" (change)="search()"/>
       </div>
 
-      <div class="col-lg-2 mb-3">
-        <label for="to">To</label>
-        <input [(ngModel)]="toDate" name="toDate" type="date" name="to" id="to" class="form-control" (change)="search()"/>
+
+      <div class="col-lg-2 mb-3" *ngIf="!displayDate">
+        <label for="creationDate">Creation Date</label>
+        <input [(ngModel)]="creationDate" name="creationDate" type="date" name="creationDate" id="creationDate"
+               class="form-control" (change)="checkDates()"/>
+      </div>
+
+      <div class="col-lg-2 mb-3" *ngIf="displayDate">
+        <label for="cretionRange">Creation Date</label>
+        <select [(ngModel)]="sessionId" name="cretionRange" class="form-control" id="cretionRange" (change)="search()">
+          <option *ngFor="let date of dateRange" value="{{date.sessionId}}">{{date.creationDate}}</option>
+        </select>
       </div>
 
 

@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import { User } from '../../interface/User';
-import { LoginService } from '../../service/login.service';
-import { Router } from '@angular/router';
-import { NGXLogger } from 'ngx-logger';
+import {User} from '../../interface/User';
+import {LoginService} from '../../service/login.service';
+import {Router} from '@angular/router';
+import {NGXLogger} from 'ngx-logger';
 
 @Component({
   selector: 'app-login',
@@ -21,9 +21,9 @@ export class LoginComponent implements OnInit {
 
   login(): void {
     this.logger.info('Start Loging Proccess' , this.user);
-    this.loginService.doLogin(this.user).subscribe(loggedUser => {
-      this.loginService.setUserLogin(loggedUser);
-      this.logger.info('Save User | ' , loggedUser);
+    this.loginService.doLogin(this.user).subscribe(response => {
+        this.loginService.setUserLogin(<User>response.body);
+        this.logger.info('Save User | ', response, response.headers.get('Authorization'));
       this.router.navigate(['log']);
     },
       error => this.error = true );

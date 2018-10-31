@@ -5,4 +5,5 @@ export interface SummuryDTO {
  commitedTransfers: number;
  rejectedTransfers: number;
  duplicateTransfers: number;
+  creationDate: Date;
 }

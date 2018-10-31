@@ -8,7 +8,7 @@
 
   <div class="custom-file">
     <input type="file" name="file" class="custom-file-input" id="validatedCustomFile" ng2FileSelect
-           [uploader]="uploader">
+           (click)="uploader.clearQueue()" [uploader]="uploader">
     <label class="custom-file-label" for="validatedCustomFile">{{fileChooser}}</label>
   </div>
 
@@ -21,14 +21,8 @@
     Upload File
   </button>
 
-  <button type="button" class="btn btn-danger btn-s"
-          (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
-    <i class="fas fa-trash"></i> Clear
-  </button>
-
   <p></p>
 
-  <p>Upload Queue | length: {{ uploader?.queue?.length }}</p>
 
   <table class="table">
     <thead>
@@ -64,7 +58,6 @@
   <br>
   <div *ngIf="uploadError" class="alert alert-danger" role="alert">
     {{errorMessage}}<br/>
-    <small>click clear and choose anther file</small>
   </div>
 
   <div *ngIf="uploadSuccess">

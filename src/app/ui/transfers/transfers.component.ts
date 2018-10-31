@@ -3,7 +3,7 @@ import {FileUploader} from 'ng2-file-upload/ng2-file-upload';
 import {SessionService} from '../../service/session.service';
 import {environment} from '../../../environments/environment';
 import {Acknowledge} from '../../interface/Acknowledge';
-import { NGXLogger } from 'ngx-logger';
+import {NGXLogger} from 'ngx-logger';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class TransfersComponent implements OnInit {
   public uploader: FileUploader;
   uploadError: boolean;
   uploadSuccess: boolean;
-  errorMessage : string ;
+  errorMessage: string;
   constructor(private session: SessionService ,  private logger: NGXLogger ) {
     this.URL = environment.baseUrl + 'bulktransfer';
     this.fileChooser = 'Select Deposits Datasheet';
@@ -35,6 +35,7 @@ export class TransfersComponent implements OnInit {
     this.uploader.onAfterAddingFile = (file) => {
       file.withCredentials = true;
     };
+    // @ts-ignore
     this.uploader.onCompleteItem = (item: any, response: Acknowledge, status: any, headers: any) => {
       this.logger.info('FileUpload:uploaded:', item, status, response);
       switch (status) {
@@ -46,11 +47,13 @@ export class TransfersComponent implements OnInit {
         case 400:
           this.uploadError = true;
           this.uploadSuccess = false;
+          // @ts-ignore
           this.errorMessage = (<Acknowledge> JSON.parse( response )).statusMessage;
           break;
         case 200:
           this.uploadSuccess = true;
           this.uploadError = false;
+          // @ts-ignore
           this.session.setSessionId((<Acknowledge>JSON.parse(response)).data.uuid);
           break;
       }

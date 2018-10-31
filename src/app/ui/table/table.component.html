@@ -2,7 +2,7 @@
   <table class="table  table-hover ">
     <thead>
     <tr>
-      <th scope="col">Session ID</th>
+      <th scope="col">username</th>
       <th scope="col">Bank Name</th>
       <th scope="col">Terminal ID</th>
       <th scope="col">Transfer Amount</th>
@@ -14,8 +14,8 @@
     </thead>
     <tbody>
 
-    <tr *ngFor="let log of searchService.logsDTO | paginate: { itemsPerPage: 6, currentPage: page }" >
-      <td scope="row">{{log.sessionId}}</td>
+    <tr *ngFor="let log of searchService.logsDTO | paginate: { itemsPerPage: 9, currentPage: page }">
+      <td>{{log.userName}}</td>
       <td>{{log.bankName}}</td>
       <td>{{log.terminalId}}</td>
       <td>{{log.transferAmount}}</td>
