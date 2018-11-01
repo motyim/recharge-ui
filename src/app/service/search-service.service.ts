@@ -40,6 +40,7 @@ export class SearchServiceService {
     logDTO.pageSize = -1;
     this.logDTO = logDTO;
     this.http.post<Acknowledge>(this.serverURL + 'getLog', logDTO, { withCredentials: true }).subscribe(ack => {
+      this.logger.info('Search Result :', ack.data.logList.length);
       this.logsDTO = ack.data.logList;
     });
     this.logger.info('Finish do Search ');

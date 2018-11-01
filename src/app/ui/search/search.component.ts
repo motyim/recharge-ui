@@ -4,7 +4,7 @@ import {Status} from '../../interface/Status';
 import {Banks} from '../../interface/Banks';
 import {LogDTO} from '../../interface/LogDTO';
 import {SessionService} from '../../service/session.service';
-import {DateFileterService} from '../../service/date-fileter.service';
+import {UtileService} from '../../service/utile.service';
 
 @Component({
   selector: 'app-search',
@@ -25,13 +25,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   logDTO: LogDTO ;
 
   constructor(private searchService: SearchServiceService, private session: SessionService,
-              private dateFileterService: DateFileterService) {
+              private utilService: UtileService) {
     this.sessionId = session.getSessionId();
     // @ts-ignore
     this.logDTO = {};
-    this.dateFileterService.getDateFilter().subscribe(message => {
+    this.utilService.getDateFilter().subscribe(message => {
       this.sessionId = message;
       this.search();
+    });
+
+    this.utilService.getClear().subscribe(message => {
+      this.clearinputs();
     });
   }
 
@@ -65,6 +69,14 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.logDTO.fromDate = this.fromDate;
     this.logDTO.userName = this.username;
     this.searchService.doSearch(this.logDTO);
+  }
+
+  clearinputs() {
+    this.sessionId = null;
+    this.terminalId = null;
+    this.toDate = null;
+    this.fromDate = null;
+    this.username = null;
   }
 
 }

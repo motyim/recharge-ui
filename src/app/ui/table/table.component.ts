@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import { SearchServiceService } from '../../service/search-service.service';
+import {SearchServiceService} from '../../service/search-service.service';
 import {ExcelService} from '../../service/excel.service';
+import {UtileService} from '../../service/utile.service';
 
 
 @Component({
@@ -11,7 +12,8 @@ import {ExcelService} from '../../service/excel.service';
 export class TableComponent implements OnInit {
   page: number ;
 
-  constructor(public searchService: SearchServiceService, private excelService: ExcelService) {
+  constructor(public searchService: SearchServiceService, private excelService: ExcelService
+    , private utilService: UtileService) {
     this.page = 1;
   }
 
@@ -24,6 +26,7 @@ export class TableComponent implements OnInit {
   }
 
   clear(): void {
+    this.utilService.setClear();
     this.searchService.logsDTO = [] ;
   }
 }
