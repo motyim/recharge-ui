@@ -12,7 +12,8 @@
 
       <div class="col-lg-2 mb-3">
         <label for="TerminalID">Terminal ID</label>
-        <input [(ngModel)]="terminalId" name="terminalId" type="text" class="form-control" id="TerminalID" placeholder="Terminal ID" required (change)="search()">
+        <input [(ngModel)]="terminalId" name="terminalId" type="text" class="form-control" id="TerminalID"
+               placeholder="Receiver Terminal ID" required (change)="search()">
       </div>
 
       <div class="col-lg-2 mb-3">
@@ -39,8 +40,9 @@
         <input [(ngModel)]="fromDate" name="fromDate" type="date" name="form" id="from" class="form-control" (change)="search()"/>
       </div>
 
-      <app-session-model></app-session-model>
-
+      <div class="col-lg-2 mb-3">
+        <app-session-model></app-session-model>
+      </div>
     </div>
 
   </form>

@@ -8,20 +8,11 @@
 
   <div class="custom-file">
     <input type="file" name="file" class="custom-file-input" id="validatedCustomFile" ng2FileSelect
-           (click)="uploader.clearQueue()" [uploader]="uploader">
+           (click)="browsNewFile()" [uploader]="uploader">
     <label class="custom-file-label" for="validatedCustomFile">{{fileChooser}}</label>
   </div>
 
 
-  <!--<input type="file" name="file" ng2FileSelect [uploader]="uploader" />-->
-
-  <button type="button" class="btn btn-success btn-s"
-          (click)="upload()"
-          [disabled]="!uploader.getNotUploadedItems().length">
-    Upload File
-  </button>
-
-  <p></p>
 
 
   <table class="table">
@@ -45,8 +36,18 @@
     </tbody>
   </table>
 
+  <!--<input type="file" name="file" ng2FileSelect [uploader]="uploader" />-->
+
+  <button type="button" class="btn btn-success btn-s"
+          (click)="upload()"
+          [disabled]="!uploader.getNotUploadedItems().length">
+    Upload File
+  </button>
+
+  <p></p>
+
   <div>
-    <div>
+    <div *ngIf="uploader.progress">
       Queue progress:
       <div class="progress" style="">
         <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>

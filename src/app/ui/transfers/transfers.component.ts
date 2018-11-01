@@ -63,4 +63,11 @@ export class TransfersComponent implements OnInit {
   upload() {
     this.uploader.uploadAll();
   }
+
+  browsNewFile() {
+    this.uploadError = false;
+    this.uploadSuccess = false;
+    this.uploader.clearQueue();
+  }
 }
+
