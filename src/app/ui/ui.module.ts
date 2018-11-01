@@ -12,12 +12,15 @@ import {SearchComponent} from './search/search.component';
 import {TableComponent} from './table/table.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FileUploadModule} from 'ng2-file-upload';
-import { FormsModule } from '@angular/forms';
-import { ChangePasswordComponent } from './change-password/change-password.component';
+import {FormsModule} from '@angular/forms';
+import {ChangePasswordComponent} from './change-password/change-password.component';
 import {Ng2Webstorage} from 'ngx-webstorage';
-import { LogoutComponent } from './logout/logout.component';
-import { LoggerModule, NgxLoggerLevel } from 'ngx-logger';
+import {LogoutComponent} from './logout/logout.component';
+import {LoggerModule, NgxLoggerLevel} from 'ngx-logger';
 import {NgxPaginationModule} from 'ngx-pagination';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {SessionModelComponent} from './session-model/session-model.component';
+
 
 @NgModule({
   imports: [
@@ -27,11 +30,12 @@ import {NgxPaginationModule} from 'ngx-pagination';
     Ng2Webstorage,
     FileUploadModule,
     LoggerModule.forRoot({serverLoggingUrl: '/api/logs', level: NgxLoggerLevel.DEBUG, serverLogLevel: NgxLoggerLevel.ERROR}),
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgbModule
   ],
   exports: [LayoutComponent],
   declarations: [LayoutComponent, SlidbarComponent, ContentComponent, LoginComponent, ConfigerComponent, TransfersComponent
-    , SummryComponent, LogComponent, SearchComponent, TableComponent, ChangePasswordComponent, LogoutComponent]
+    , SummryComponent, LogComponent, SearchComponent, TableComponent, ChangePasswordComponent, LogoutComponent, SessionModelComponent]
 })
 export class UiModule {
 }

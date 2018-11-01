@@ -4,7 +4,7 @@ import {Status} from '../../interface/Status';
 import {Banks} from '../../interface/Banks';
 import {LogDTO} from '../../interface/LogDTO';
 import {SessionService} from '../../service/session.service';
-import {SummuryDTO} from '../../interface/SummuryDTO';
+import {DateFileterService} from '../../service/date-fileter.service';
 
 @Component({
   selector: 'app-search',
@@ -22,16 +22,17 @@ export class SearchComponent implements OnInit, OnDestroy {
   username: string;
   fromDate: Date;
   toDate: Date;
-  creationDate: Date;
   logDTO: LogDTO ;
-  // ONLY ALLAH KNEW WHY I DO THIS SHIT CODE :)
-  displayDate: boolean;
-  dateRange: SummuryDTO[];
-  constructor(private searchService: SearchServiceService , private session: SessionService) {
+
+  constructor(private searchService: SearchServiceService, private session: SessionService,
+              private dateFileterService: DateFileterService) {
     this.sessionId = session.getSessionId();
     // @ts-ignore
     this.logDTO = {};
-    this.displayDate = false;
+    this.dateFileterService.getDateFilter().subscribe(message => {
+      this.sessionId = message;
+      this.search();
+    });
   }
 
   ngOnInit() {
@@ -66,14 +67,4 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.searchService.doSearch(this.logDTO);
   }
 
-  checkDates(): void {
-    const creationDto: LogDTO = {
-      creationDate: this.creationDate;
-  }
-    ;
-    this.searchService.getDates(creationDto).subscribe(ack => {
-      this.displayDate = true;
-      this.dateRange = ack.data.summuryDtoList;
-    });
-  }
 }
