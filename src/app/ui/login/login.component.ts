@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     this.loginService.doLogin(this.user).subscribe(response => {
         this.loginService.setUserLogin(<User>response.body);
         this.logger.info('Save User | ', response, response.headers.get('Authorization'));
-      this.router.navigate(['log']);
+        this.router.navigate(['transfer']);
     },
       error => this.error = true );
   }

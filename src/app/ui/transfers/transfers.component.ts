@@ -48,7 +48,8 @@ export class TransfersComponent implements OnInit {
           this.uploadError = true;
           this.uploadSuccess = false;
           // @ts-ignore
-          this.errorMessage = (<Acknowledge> JSON.parse( response )).statusMessage;
+          // this.errorMessage = (<Acknowledge> JSON.parse( response )).statusMessage;
+          this.errorMessage = 'Please Upload Correct Deposits Datasheet With ( XLXS ) Format  & EOF Delimiter ';
           break;
         case 200:
           this.uploadSuccess = true;

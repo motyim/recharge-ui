@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import { User } from '../interface/User';
-import { SessionStorageService } from 'ngx-webstorage';
+import {User} from '../interface/User';
+import {SessionStorageService} from 'ngx-webstorage';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,19 @@ import { SessionStorageService } from 'ngx-webstorage';
 export class SessionService {
 
   private sessionID: string;
-  private _user: User ;
-
   constructor(private sessionStorage: SessionStorageService) {
+  }
+
+  private _user: User;
+
+  private _sessionCreation: Date;
+
+  get sessionCreation(): Date {
+    return this._sessionCreation;
+  }
+
+  set sessionCreation(value: Date) {
+    this._sessionCreation = value;
   }
 
   setSessionId(sessionID: string): void {

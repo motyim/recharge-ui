@@ -1,11 +1,9 @@
 export interface ExportLog {
-  sessionId: Date;
+  sessionId: string;
   terminalId: string;
   status: string;
   bankName: string;
-  fromDate: Date;
-  toDate: Date;
-  depositDate: Date;
+  depositDate: string;
   rejectionReason: string;
   transferAmount: number;
   userName: string;

@@ -5,6 +5,7 @@ import {Banks} from '../../interface/Banks';
 import {LogDTO} from '../../interface/LogDTO';
 import {SessionService} from '../../service/session.service';
 import {UtileService} from '../../service/utile.service';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-search',
@@ -65,10 +66,20 @@ export class SearchComponent implements OnInit, OnDestroy {
     this.logDTO.terminalId = this.terminalId;
     this.logDTO.bankName = this.bankName;
     this.logDTO.status = this.status;
-    this.logDTO.toDate = this.toDate;
     this.logDTO.fromDate = this.fromDate;
+    // add one day
+    // @ts-ignore
+    this.logDTO.toDate = this.parseDate(this.fromDate);
     this.logDTO.userName = this.username;
     this.searchService.doSearch(this.logDTO);
+  }
+
+  parseDate(str: string): string {
+    if (!str) return;
+    const from = str.split('-');
+    // @ts-ignore
+    const date = new Date(from[0], parseInt(from[1]) - 1, parseInt(from[2]) + 1);
+    return new DatePipe('en-US').transform(date, 'yyyy-MM-dd');
   }
 
   clearinputs() {
